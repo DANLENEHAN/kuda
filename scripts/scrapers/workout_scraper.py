@@ -1,9 +1,15 @@
+import time
+import json
 import re
 from enum import Enum
 from bs4 import BeautifulSoup, element
 import requests
-from typing import List, TypedDict, Tuple, Dict
+from typing import List, TypedDict, Tuple, Dict, Optional
 from itertools import cycle
+
+# To Do
+# - Find all energy levels
+# - Remove all raises with logic
 
 
 class BBSetType(Enum):
@@ -22,6 +28,7 @@ class SetComponent(TypedDict):
     sequence: int
     weight_metric: str
     weight: str
+    target: str
     reps: str
     rest_time: str
     exercise_name: str
@@ -52,7 +59,9 @@ class Workout(TypedDict):
 
 
 request_agent = "Mozilla/5.0 Chrome/47.0.2526.106 Safari/537.36"
-url1 = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/coachdmurph/5bf3ec42176a3027b0ad04d8"
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/coachdmurph/5bf3ec42176a3027b0ad04d8"
+url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzzzed/568043a60cf271ee0b87a970"
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzyt/5721ad540cf2b58f38ced9d7"
 
 
 def get_rest_time(string: str) -> str:
@@ -68,7 +77,8 @@ def get_rest_time(string: str) -> str:
     return str(int(min) * 60 + int(secs))
 
 
-def get_weight_reps(string: str) -> Tuple[str, str, str]:
+def get_weight_reps(set_component_performance: element.Tag) -> Tuple[str, str, str]:
+    string = set_component_performance.text
     if string is None:
         return None
     string = string.strip().replace("\n", "").lower()
@@ -76,16 +86,71 @@ def get_weight_reps(string: str) -> Tuple[str, str, str]:
 
     if "lbs" in weight:
         weight_metric = "lbs"
-        weight = re.sub("lbs|\.", "", weight)
+        weight = re.sub("lbs.", "", weight)
     elif "kg" in weight:
         weight_metric = "kg"
-        weight = re.sub("kg|\.", "", weight)
+        weight = re.sub("kg.", "", weight)
     else:
         raise ValueError("Weight Metric not found")
 
     reps = re.sub("reps|\.", "", reps)
 
     return (weight_metric, weight, reps)
+
+
+def get_energy_level(workout_footer: element.Tag) -> int:
+    if workout_footer.find("div", {"class": "high"}):
+        return 4
+    elif workout_footer.find("div", {"class": "mid-high"}):
+        return 3
+    else:
+        raise ValueError("Energy Level not found")
+
+
+def get_bb_set_type_and_target(
+    set_component_title: element.Tag,
+) -> Tuple[str, Optional[str]]:
+    atts: List[str] = (
+        set_component_title.text.strip()
+        .replace(" ", "")
+        .replace("\n\n", "-")
+        .split("-")
+    )
+    bb_set_type = atts[0]
+    target_string = None
+    if len(atts) > 1:
+        target_string = (
+            atts[1].lower().replace("target", "").replace("reps", "").strip()
+        )
+        if ":" in target_string:
+            # Can be "TARGET: 00:00:00"
+            components = target_string.split(":")
+            if len(components) == 3:
+                hrs, mins, secs = components
+                target_string = str(int(hrs) * 3600 + int(mins) * 60 + int(secs))
+            elif len(components) == 4:
+                _, hrs, mins, secs = components
+                target_string = str(int(hrs) * 3600 + int(mins) * 60 + int(secs))
+            else:
+                raise ValueError("Target string not found")
+    return bb_set_type, target_string
+
+
+def find_rest_for_set_component(set_title: element.Tag, set_type: str) -> str:
+    set_row = set_title.find_parent()
+    if set_type == SetTypes.SUPER_SET.value:
+        while "set-body" not in set_row.get("class"):
+            set_row = set_row.find_parent()
+    else:
+        while "set" not in set_row.get("class"):
+            set_row = set_row.find_parent()
+
+    divs = set_row.find_next_siblings("div")
+    for div in divs:
+        if "set-body" in div.get("class"):
+            return None
+        if "set-rest" in div.get("class"):
+            return get_rest_time(div.text)
 
 
 def scrape_workout_page(url: str) -> Workout:
@@ -121,8 +186,7 @@ def scrape_workout_page(url: str) -> Workout:
     workout["cardio_time"] = str(int(hrs) * 3600 + int(mins) * 60)
 
     workout_footer = html_page.find("div", {"class": "workout-footer"})
-    energy_level = workout_footer.findAll("span", {"class": "battery-cell"})
-    workout["energy_level"] = len(energy_level)
+    workout["energy_level"] = get_energy_level(workout_footer)
     rating = workout_footer.find("span", {"class": "bigRating"}).text.strip()
     workout["self_rating"] = rating
 
@@ -160,10 +224,6 @@ def scrape_workout_page(url: str) -> Workout:
             "div", {"class": "set"}
         )
 
-        set_component_rests: List[element.Tag] = exercise_details[
-            workout_component_index
-        ].findAll("div", {"class": "set-rest"})
-
         exercise_tags: List[element.Tag] = exercise_overview[
             workout_component_index
         ].findAll("div", {"class": "exercise-info"})
@@ -194,10 +254,6 @@ def scrape_workout_page(url: str) -> Workout:
             )
         exercise_data: Dict = cycle(exercise_data)
 
-        # For indexing 'set' rest times. Because BB.com treats sets and set components
-        # there is a 'rest_time' under each 'set' which for us is a set_component in the
-        # case of a super set. See where 'total_set_components' is used below.
-        total_set_components: int = 0
         for set_index, set_tag in enumerate(set_tags):
             set_: Set = Set()
             set_["set_components"]: List[SetComponent] = []
@@ -231,7 +287,13 @@ def scrape_workout_page(url: str) -> Workout:
                 set_component: SetComponent = SetComponent()
                 set_component["sequence"] = set_component_index + 1
 
-                bb_set_type = set_component_titles[set_component_index].text.strip()
+                # The set component type here is interesting
+                # It can also give a target. e.g. "TARGET 300 REPS"
+                # Some users don't fill in completed reps and weight
+                # so we'll track this in case it's useful
+                bb_set_type, target = get_bb_set_type_and_target(
+                    set_component_title=set_component_titles[set_component_index]
+                )
 
                 # Can be a span containing dropset info e.g. "DROP 1"
                 if set_component_titles[set_component_index].find("span"):
@@ -247,7 +309,7 @@ def scrape_workout_page(url: str) -> Workout:
                     or set_["type"] == SetTypes.DROP_SET.value
                 ):
                     weight_metric, weight, reps = get_weight_reps(
-                        set_component_performances[set_component_index].text
+                        set_component_performances[set_component_index]
                     )
                 elif bb_set_type == BBSetType.TIME.value:
                     weight_metric = "seconds"
@@ -263,11 +325,16 @@ def scrape_workout_page(url: str) -> Workout:
                         + int(secs.replace("sec", ""))
                     )
                     reps = None
+                else:
+                    raise ValueError("BBSetType not found")
 
                 # Populate the set component
                 set_component["weight_metric"] = weight_metric
                 set_component["weight"] = weight
                 set_component["reps"] = reps
+
+                if target is not None:
+                    set_component["target"] = target
 
                 exercise = next(exercise_data)
                 set_component["exercise_link"] = exercise["exercise_link"]
@@ -276,69 +343,44 @@ def scrape_workout_page(url: str) -> Workout:
                 set_component["exercise_type"] = exercise["exercise_type"]
                 set_component["exercise_equipment"] = exercise["exercise_equipment"]
 
-                rest_time: str = None
-                if set_component_rests is not None:
-                    # Case: <Last set Rest time>
-                    # will be the rest time of the workout component
-                    if set_index == len(set_tags) - 1:
-                        if set_["type"] != SetTypes.SUPER_SET.value:
-                            rest_time = workout_component["rest_time"]
-                        else:
-                            # If superset there's a bug where the first set component
-                            # of the last superset doesn't have a rest time.
-                            if set_component_index < (number_set_components - 1):
-                                # Not last set component
-                                rest_time = None
-                            elif set_component_index == (number_set_components - 1):
-                                # Last set component
-                                rest_time = workout_component["rest_time"]
-                    else:
-                        # Case: <Set Rest time>
-                        # If superset we must index by the total number of set components
-                        if set_["type"] != SetTypes.SUPER_SET.value:
-                            rest_time = get_rest_time(
-                                string=set_component_rests[set_index].text
-                            )
-                        else:
-                            rest_time = get_rest_time(
-                                string=set_component_rests[total_set_components].text
-                            )
+                # Finding the rest time for the set component
+                rest_time = find_rest_for_set_component(
+                    set_title=set_component_titles[set_component_index],
+                    set_type=set_["type"],
+                )
 
-                # Case: <Set Rest time>
-                if (
-                    set_["type"] != SetTypes.DROP_SET.value
-                    # Last set component
-                    or (
-                        set_["type"] == SetTypes.DROP_SET.value
-                        and set_component_index == number_set_components - 1
-                    )
-                ):
-                    set_component["rest_time"] = rest_time
+                # print(rest_time)
+
+                if set_["type"] == SetTypes.DROP_SET.value:
+                    # Last set component in a drop set should take the rest time of the set
+                    if set_component_index == number_set_components - 1:
+                        set_component["rest_time"] = rest_time
+                    else:
+                        set_component["rest_time"] = "0"
+                        if set_component_index == 1:
+                            # We only know if a set is a drop set in the second set component
+                            set_["set_components"][0]["rest_time"] = "0"
                 else:
-                    # Case: <Dropset Rest time>
-                    # Annoying case where we only find out about the drop
-                    # set in the second set component. So we must retroactively
-                    # remove the rest time from the first set component
-                    if set_component_index == 1:
-                        set_["set_components"][0]["rest_time"] = "0"
-                    set_component["rest_time"] = "0"
+                    set_component["rest_time"] = rest_time
+
+                if (
+                    set_index == len(set_tags) - 1
+                    and set_component_index == number_set_components - 1
+                ):
+                    # Last set in a workout component should take the rest time of the workout component
+                    set_component["rest_time"] = workout_component["rest_time"]
 
                 set_["set_components"].append(set_component)
                 set_["rest_time"] = set_component["rest_time"]
-                total_set_components += 1
-
             workout_component["sets"].append(set_)
         workout["workout_components"].append(workout_component)
     return workout
 
 
-import time
-
 start = time.time()
-workout = scrape_workout_page(url1)
+workout = scrape_workout_page(url)
 print(f"Time taken: {time.time() - start}")
 
-import json
 
-with open("workout.json", "w") as f:
+with open("./data/workout.json", "w") as f:
     f.write(json.dumps(workout, indent=4))
