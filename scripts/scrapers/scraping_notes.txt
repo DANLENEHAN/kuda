@@ -1,0 +1,13 @@
+# Workout Variants
+
+# Example URLs
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/coachdmurph/5bf3ec42176a3027b0ad04d8" # Dropset Guy (Solved)
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzyt/5721ad540cf2b58f38ced9d7"  # Superset Guy (Solved)
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzupan90/5428c1e70cf2bb28d5a57422"  # HEART RATE (Solved)
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzneo/5bcad0494e400527ce7156fc" # WEIGHT/REPS same as REPS (Solved)
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzohaib/5376f2f70cf28afcb6ce2e9a" # Did nothing guy (Solved)
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/-NYSE1-/4fb56f36b488e39f44f45352"  # Like HEART RATE guy (Solved)
+
+# Problematic URLs
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzshad/593210b4af19ce69876e7dcd" # Pull-ups/REPS Guy should we infer BW here
+# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzolowicz/5901402f36d69c3acb773dd4" # Exercise notes Guy do we want these?
