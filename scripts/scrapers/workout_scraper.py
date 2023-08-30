@@ -16,6 +16,7 @@ class BBSetType(Enum):
     WEIGHT_REPS = "WEIGHT/REPS"
     REPS = "REPS"
     TIME = "TIME"
+    # HEART_RATE = "HEARTRATE"
 
 
 class SetTypes(Enum):
@@ -59,10 +60,8 @@ class Workout(TypedDict):
 
 
 request_agent = "Mozilla/5.0 Chrome/47.0.2526.106 Safari/537.36"
-# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/coachdmurph/5bf3ec42176a3027b0ad04d8"
-url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzzzed/568043a60cf271ee0b87a970"
-# url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzyt/5721ad540cf2b58f38ced9d7"
 
+url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/coachdmurph/5bf3ec42176a3027b0ad04d8"
 
 def get_rest_time(string: str) -> str:
     if string is None:
@@ -82,16 +81,29 @@ def get_weight_reps(set_component_performance: element.Tag) -> Tuple[str, str, s
     if string is None:
         return None
     string = string.strip().replace("\n", "").lower()
-    weight, reps = string.split("x")
 
-    if "lbs" in weight:
-        weight_metric = "lbs"
-        weight = re.sub("lbs.", "", weight)
-    elif "kg" in weight:
-        weight_metric = "kg"
-        weight = re.sub("kg.", "", weight)
+    weight_reps = string.split("x")
+
+    # BBSetType WEIGHT/REPS can also be the same
+    # structure as REPS amazingly :(
+    if len(weight_reps) == 1:
+        reps = weight_reps[0]
+        weight = None
+        weight_metric = None
+    elif len(weight_reps) == 2:
+        weight, reps = weight_reps
     else:
-        raise ValueError("Weight Metric not found")
+        raise ValueError("Weight and Reps not found")
+
+    if weight:
+        if "lbs" in weight:
+            weight_metric = "lbs"
+            weight = re.sub("lbs.", "", weight)
+        elif "kg" in weight:
+            weight_metric = "kg"
+            weight = re.sub("kg.", "", weight)
+        else:
+            raise ValueError("Weight Metric not found")
 
     reps = re.sub("reps|\.", "", reps)
 
@@ -105,6 +117,44 @@ def get_energy_level(workout_footer: element.Tag) -> int:
         return 3
     else:
         raise ValueError("Energy Level not found")
+
+
+def handle_cardio_set_component(
+    set_component_titles: List[element.Tag],
+    set_component_performances: List[element.Tag],
+    exercise: Dict,
+) -> SetComponent:
+    set_component: SetComponent = SetComponent()
+
+    set_component["exercise_link"] = exercise["exercise_link"]
+    set_component["exercise_name"] = exercise["exercise_name"]
+    set_component["exercise_muscle"] = exercise["exercise_muscle"]
+    set_component["exercise_type"] = exercise["exercise_type"]
+    set_component["exercise_equipment"] = exercise["exercise_equipment"]
+
+    for index, title in enumerate(set_component_titles):
+        raw_title = title.text.strip().replace("\n", "")
+
+        if raw_title.lower() == "time":
+            performance = (
+                set_component_performances[index].text.strip().replace("\n", "")
+            )
+            performance = re.sub("hr|min|sec", "", performance)
+            hrs, mins, secs = performance.split(":")
+            set_component["weight"] = str(
+                int(hrs.replace("hr", "")) * 3600
+                + int(mins.replace("min", "")) * 60
+                + int(secs.replace("sec", ""))
+            )
+            set_component["weight_metric"] = "seconds"
+            set_component["reps"] = None
+
+    rest_time = find_rest_for_set_component(
+        set_title=set_component_titles[-1],
+        set_type=SetTypes.STRAIGHT_SET.value,
+    )
+    set_component["rest_time"] = rest_time
+    return set_component
 
 
 def get_bb_set_type_and_target(
@@ -224,6 +274,10 @@ def scrape_workout_page(url: str) -> Workout:
             "div", {"class": "set"}
         )
 
+        # Set with no data (Not completed)
+        if len(set_tags) == 0:
+            continue
+
         exercise_tags: List[element.Tag] = exercise_overview[
             workout_component_index
         ].findAll("div", {"class": "exercise-info"})
@@ -234,22 +288,29 @@ def scrape_workout_page(url: str) -> Workout:
 
         exercise_data: Dict = []
         for index, exercise_tag in enumerate(exercise_tags):
+            muscle = exercise_muscle_and_equipment[index].findAll("li")[0].find("a")
+            exercise_type = (
+                exercise_muscle_and_equipment[index].findAll("li")[1].find("a")
+            )
+            exercise_equipment = (
+                exercise_muscle_and_equipment[index].findAll("li")[2].find("a")
+            )
+            exercise_link = exercise_tag.find("p", {"class": "exercise-nav"}).find("a")
             exercise_data.append(
                 {
                     "exercise_name": exercise_tag.find("h3").text,
-                    "exercise_link": exercise_tag.find("a").get("href"),
-                    "exercise_muscle": exercise_muscle_and_equipment[index]
-                    .findAll("li")[0]
-                    .find("a")
-                    .text.strip(),
-                    "exercise_type": exercise_muscle_and_equipment[index]
-                    .findAll("li")[1]
-                    .find("a")
-                    .text.strip(),
-                    "exercise_equipment": exercise_muscle_and_equipment[index]
-                    .findAll("li")[2]
-                    .find("a")
-                    .text.strip(),
+                    "exercise_link": exercise_link.get("href")
+                    if exercise_link is not None
+                    else None,
+                    "exercise_muscle": muscle.text.strip()
+                    if muscle is not None
+                    else None,
+                    "exercise_type": exercise_type.text.strip()
+                    if exercise_type is not None
+                    else None,
+                    "exercise_equipment": exercise_equipment.text.strip()
+                    if exercise_equipment
+                    else None,
                 }
             )
         exercise_data: Dict = cycle(exercise_data)
@@ -280,6 +341,20 @@ def scrape_workout_page(url: str) -> Workout:
             # Look for more cases than the below
             if len(set_titles) > 0 and len(set_titles) < 2:
                 set_["type"] = SetTypes.STRAIGHT_SET.value
+                if "Cardio" in set_titles[0].text:
+                    if len(set_component_titles) == 1:
+                        pass
+                    # complicated cardio
+                    else:
+                        set_["set_components"].append(
+                            handle_cardio_set_component(
+                                set_component_titles=set_component_titles,
+                                set_component_performances=set_component_performances,
+                                exercise=next(exercise_data),
+                            )
+                        )
+                        workout_component["sets"].append(set_)
+                        continue
             else:
                 set_["type"] = SetTypes.SUPER_SET.value
 
@@ -325,6 +400,16 @@ def scrape_workout_page(url: str) -> Workout:
                         + int(secs.replace("sec", ""))
                     )
                     reps = None
+                elif bb_set_type == BBSetType.REPS.value:
+                    string = (
+                        set_component_performances[set_component_index]
+                        .text.strip()
+                        .replace("\n", "")
+                        .lower()
+                    )
+                    weight_metric = None  # Could be "bodyweight"
+                    weight = None
+                    reps = re.sub("reps|\.", "", string)
                 else:
                     raise ValueError("BBSetType not found")
 
