@@ -11,3 +11,9 @@
 # Problematic URLs
 # url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzshad/593210b4af19ce69876e7dcd" # Pull-ups/REPS Guy should we infer BW here
 # url = "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/zzolowicz/5901402f36d69c3acb773dd4" # Exercise notes Guy do we want these?
+
+# New
+
+# Next two: Normal sets have TIME and REPS
+https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/12LittLebit/5a024d9fb36829286bb464e9
+https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/12laynew/58097f260cf27a6fb6996c8d
