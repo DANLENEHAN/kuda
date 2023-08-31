@@ -1,5 +1,3 @@
-import time
-import json
 import re
 from enum import Enum
 from bs4 import BeautifulSoup, element
@@ -36,7 +34,6 @@ class SetComponent(TypedDict):
 class Set(TypedDict):
     type: SetTypes
     sequence: int
-    set_sequence: int
     rest_time: str
     set_components: List[SetComponent]
 
@@ -48,12 +45,14 @@ class WorkoutComponent(TypedDict):
 
 
 class Workout(TypedDict):
+    created_by: str
     name: str
     muscles_used: List[str]
-    workout_time: str
-    cardio_time: str
+    duration: str
+    cardio_duration: str
     rating: str
     workout_components: List[WorkoutComponent]
+    username: str
 
 
 request_agent = "Mozilla/5.0 Chrome/47.0.2526.106 Safari/537.36"
@@ -277,6 +276,7 @@ def find_rest_for_set_component(set_title: element.Tag, set_type: str) -> str:
 
 
 def scrape_workout_page(url: str) -> Workout:
+    username = url.split("viewworkoutlog")[1].split("/")[1]
     html_page: element.Tag = BeautifulSoup(
         requests.get(url, headers={"User-Agent": request_agent}).text, "lxml"
     )
@@ -287,6 +287,7 @@ def scrape_workout_page(url: str) -> Workout:
         "div", {"class": "rowSectionHeader"}
     ).text
     workout["name"] = workout_name
+    workout["username"] = username
 
     # Get the Muslces worked according to the App
     muscles_used_tag: element.Tag = html_page.find(
@@ -300,13 +301,13 @@ def scrape_workout_page(url: str) -> Workout:
         "span", {"wicketpath": "logResultsPanel_workoutSummary_totalWorkoutTime"}
     ).text.strip()
     hrs, mins = workout_time.split(":")
-    workout["workout_time"] = str(int(hrs) * 3600 + int(mins) * 60)
+    workout["duration"] = str(int(hrs) * 3600 + int(mins) * 60)
 
     cardio_time = html_page.find(
         "span", {"wicketpath": "logResultsPanel_workoutSummary_totalCardioTime"}
     ).text.strip()
     hrs, mins = cardio_time.split(":")
-    workout["cardio_time"] = str(int(hrs) * 3600 + int(mins) * 60)
+    workout["cardio_duration"] = str(int(hrs) * 3600 + int(mins) * 60)
 
     workout_footer = html_page.find("div", {"class": "workout-footer"})
     workout["energy_level"] = get_energy_level(workout_footer)

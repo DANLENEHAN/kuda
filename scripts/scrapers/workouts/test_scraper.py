@@ -58,12 +58,13 @@ def test_scraped_links() -> None:
 def save_tested_links() -> None:
     tested_links = []
     for link in TESTED_LINKS:
-        print("Testing link: ", link)
+        print("Processing link: ", link)
         workout = scrape_workout_page(link)
         tested_links.append(workout)
 
     with open("./data/scraped_data/workouts/tested_links.json", "w") as f:
-        f.write(json.dumps(tested_links), indent=4)
+        f.write(json.dumps(tested_links, indent=4))
+    print("Saved!")
 
 
 # start = time.time()
