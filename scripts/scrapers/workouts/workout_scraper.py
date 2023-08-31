@@ -437,10 +437,9 @@ def scrape_workout_page(url: str) -> Workout:
                 set_["type"] = SetTypes.SUPER_SET.value
 
             for set_component_index in range(number_set_components):
-
                 if (
-                    set_component_index < len(set_bodies) and
-                    len(
+                    set_component_index < len(set_bodies)
+                    and len(
                         set_bodies[set_component_index].findAll(
                             "div", {"class": "set-row"}
                         )
