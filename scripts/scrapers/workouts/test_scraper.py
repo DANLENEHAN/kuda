@@ -1,6 +1,7 @@
 import pandas as pd
 import json
 from random import randint
+import time
 from typing import Dict
 
 from deepdiff import DeepDiff
@@ -67,10 +68,13 @@ def save_tested_links() -> None:
     print("Saved!")
 
 
-# start = time.time()
-# workout = scrape_workout_page(
-#     tests[9]
-# )
-# print(f"Time taken: {time.time() - start}")
+def scrape_single_workout(link: str):
+    start = time.time()
+    workout = scrape_workout_page(link)
+    print(f"Time taken: {time.time() - start}")
+    with open("./data/scraped_data/workouts/workout.json", "w") as f:
+        f.write(json.dumps(workout, indent=4))
+    return workout
 
-test_scraped_links()
+
+scrape_single_workout(TESTED_LINKS[-1])
