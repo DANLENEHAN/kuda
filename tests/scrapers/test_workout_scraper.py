@@ -6,7 +6,7 @@ from kuda.scrapers import scrape_workout
 
 from ..vars import WORKOUT_VARIANTS
 
-FILE_PATH = "test/files/"
+FILE_PATH = "tests/files/"
 
 
 def test_scraped_links() -> None:
