@@ -1,3 +1,6 @@
+# pylint: disable=all
+# mypy: ignore-errors
+
 import re
 from enum import Enum
 from itertools import cycle
@@ -295,7 +298,7 @@ def find_rest_for_set_component(
             return get_rest_time(div.text)
 
 
-def scrape_workout(url: str) -> Workout:
+def scrape_workout(url: str) -> Dict[str, str]:
     username = url.split("viewworkoutlog")[1].split("/")[1]
     html_page: element.Tag = BeautifulSoup(
         requests.get(url, headers={"User-Agent": request_agent}).text, "lxml"

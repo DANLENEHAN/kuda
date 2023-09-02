@@ -1,3 +1,6 @@
+# pylint: disable=all
+# mypy: ignore-errors
+
 # Doing some Analysis on the old Male Workout Links Data
 
 import os
@@ -6,10 +9,6 @@ from pprint import pprint
 
 import numpy as np
 import pandas as pd
-
-root_path: str = (
-    "big_data/phase_zero/workout_links/male_workout_links/links_set_2"
-)
 
 example_workout_link: str = (
     "https://bodyspace.bodybuilding.com/"  # base url
@@ -23,13 +22,17 @@ def extract_username(links: str) -> str:
     Extracts the username from the links column
     """
 
-    links = list(literal_eval(links))
-    if len(links) == 0:
+    link_list = list(literal_eval(links))
+    if len(link_list) == 0:
         return "n/a"
-    return links[0].split("viewworkoutlog")[1].split("/")[1]
+    return link_list[0].split("viewworkoutlog")[1].split("/")[1]
 
 
-def add_username_col(pdf: pd.DataFrame) -> None:
+def add_username_col(root_path: str) -> None:
+    """
+    Adds a username column to the data
+    """
+
     # Adding username column to the data
     for _, _, files in os.walk(root_path):
         for file in files:
@@ -51,7 +54,10 @@ def add_username_col(pdf: pd.DataFrame) -> None:
 # Getting all files into one big DF
 # Four loops because I'm lazy :)
 data = []
-root_path: str = "./phase_zero/data/workout_links/male/set_1"
+root_path: str = (
+    "big_data/phase_zero/workout_links/male_workout_links/links_set_1"
+)
+
 for _, _, files in os.walk(root_path):
     for file in files:
         if ".csv" not in file:
@@ -60,7 +66,11 @@ for _, _, files in os.walk(root_path):
         pdf = pd.read_csv(f"{root_path}/{file}")
         data.extend(pdf.to_dict(orient="records"))
         del pdf
-root_path: str = "./phase_zero/data/workout_links/male/set_2"
+
+root_path: str = (
+    "big_data/phase_zero/workout_links/male_workout_links/links_set_2"
+)
+
 for _, _, files in os.walk(root_path):
     for file in files:
         if ".csv" not in file:
@@ -135,16 +145,24 @@ pprint(age_dist.to_dict(orient="records"))
 
 most_wrks = age_dist.Links.nlargest(1, keep="all")
 print(
-    f"\nHighest workout count: Age: {age_dist.iloc[most_wrks.index[0]].Age} Num workouts: {most_wrks.iloc[0]}\n\n",
+    (
+        "\nHighest workout count: Age: "
+        f"{age_dist.iloc[most_wrks.index[0]].Age} "
+        f"Num workouts: {most_wrks.iloc[0]}\n\n",
+    )
 )
 snd_most_wrks = age_dist.Links.nlargest(2, keep="all")
 print(
-    f"Second highest workout count: Age: {age_dist.iloc[snd_most_wrks.index[-1]].Age} Num workouts: {snd_most_wrks.iloc[-1]}\n\n",
+    "Second highest workout count: Age: "
+    f"{age_dist.iloc[snd_most_wrks.index[-1]].Age} "
+    f"Num workouts: {snd_most_wrks.iloc[-1]}\n\n",
 )
 
 least_wrks = age_dist.Links.nsmallest(1, keep="all")
 print(
-    f"Lowest workout count: Age: {age_dist.iloc[least_wrks.index[-1]].Age} Num workouts: {least_wrks.iloc[-1]}\n\n",
+    "Lowest workout count: Age: "
+    f"{age_dist.iloc[least_wrks.index[-1]].Age} "
+    f"Num workouts: {least_wrks.iloc[-1]}\n\n",
 )
 
 df.to_csv("./data/workoutlinks/full_male_workout_links.csv", index=False)

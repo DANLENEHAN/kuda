@@ -5,4 +5,4 @@ virtualenv --python=/opt/homebrew/bin/python3.11 ~/virtualenvs/kuda
 pip install -e ~/Work/grau
 
 # Install kuda package
-pip install -e kuda
+pip install -e .
