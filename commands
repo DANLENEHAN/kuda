@@ -9,3 +9,16 @@ pip install -e .
 
 # Install sheiva_cloud package
 pip install -e ~/Work/sheiva_cloud
+
+# connect to CodeArtifact with pip
+aws codeartifact login --tool pip --repository kuda --domain kuda --domain-owner 381528172721 --region eu-west-1
+
+# connect to CodeArtifact with twine
+aws codeartifact login --tool twine --repository kuda --domain kuda --domain-owner 381528172721 --region eu-west-1
+
+# unset CodeArtifact credentials
+pip config list
+pip config unset global.extra-index-url
+
+# Generating distribution archives (Must be from the root of the project)
+python3 -m pip install --upgrade build

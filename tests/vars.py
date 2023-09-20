@@ -65,4 +65,10 @@ WORKOUT_VARIANTS: List[Dict[str, str]] = [
             "Contains mix of set types with " "target reps and rest times."
         ),
     },
+    {
+        "link": f"{BASE_WORKOUT_URL}1243week/5a65f0b549cd4326e09821ca",
+        "summary:": (
+            "Broke the scraper with a weird set component title condition."
+        ),
+    },
 ]

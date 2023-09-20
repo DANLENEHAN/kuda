@@ -1,0 +1,799 @@
+[
+    {
+        "name": "Kris Gethin 12-Week Daily Trainer - Week 4: Day 24 - Shoulders",
+        "username": "102561",
+        "url": "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/102561/54ff1aed0cf2b9e68f9ec26f",
+        "muscles_used": [
+            "Shoulders",
+            "Abdominals",
+            "Quadriceps"
+        ],
+        "duration": "4500",
+        "cardio_duration": "2100",
+        "energy_level": 4,
+        "self_rating": "10",
+        "workout_components": [
+            {
+                "sequence": 1,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "seconds",
+                                "weight": "1200",
+                                "reps": null,
+                                "target": "1200",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/jogging-treadmill",
+                                "exercise_name": "Jogging-Treadmill",
+                                "exercise_muscle": "Quadriceps",
+                                "exercise_type": "cardio",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "18"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "18"
+                    }
+                ],
+                "rest_time": "18"
+            },
+            {
+                "sequence": 2,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "30",
+                                "reps": "200",
+                                "target": "300",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/seated-barbell-twist",
+                                "exercise_name": "Seated Barbell Twist",
+                                "exercise_muscle": "Abdominals",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Barbell",
+                                "rest_time": "10"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "10"
+                    }
+                ],
+                "rest_time": "10"
+            },
+            {
+                "sequence": 3,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "15",
+                                "reps": "15",
+                                "target": "8",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/side-lateral-raise",
+                                "exercise_name": "Side Lateral Raise",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "22"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "22"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "15",
+                                "reps": "13",
+                                "target": "8",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/side-lateral-raise",
+                                "exercise_name": "Side Lateral Raise",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "53"
+                            }
+                        ],
+                        "sequence": 2,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "53"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "15",
+                                "reps": "15",
+                                "target": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/side-lateral-raise",
+                                "exercise_name": "Side Lateral Raise",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "47"
+                            }
+                        ],
+                        "sequence": 3,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "47"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "15",
+                                "reps": "10",
+                                "target": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/side-lateral-raise",
+                                "exercise_name": "Side Lateral Raise",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "34"
+                            }
+                        ],
+                        "sequence": 4,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "34"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "15",
+                                "reps": "10",
+                                "target": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/side-lateral-raise",
+                                "exercise_name": "Side Lateral Raise",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "44"
+                            }
+                        ],
+                        "sequence": 5,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "44"
+                    }
+                ],
+                "rest_time": "44"
+            },
+            {
+                "sequence": 4,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "40",
+                                "reps": "10",
+                                "target": "8",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/dumbbell-shoulder-press",
+                                "exercise_name": "Dumbbell Shoulder Press",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "4"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "4"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "40",
+                                "reps": "10",
+                                "target": "5",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/dumbbell-shoulder-press",
+                                "exercise_name": "Dumbbell Shoulder Press",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "11"
+                            }
+                        ],
+                        "sequence": 2,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "11"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "40",
+                                "reps": "10",
+                                "target": "5",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/dumbbell-shoulder-press",
+                                "exercise_name": "Dumbbell Shoulder Press",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "26"
+                            },
+                            {
+                                "sequence": 2,
+                                "weight_metric": "lbs",
+                                "weight": "40",
+                                "reps": "10",
+                                "target": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/dumbbell-shoulder-press",
+                                "exercise_name": "Dumbbell Shoulder Press",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "26"
+                            }
+                        ],
+                        "sequence": 3,
+                        "type": "DROP_SET",
+                        "rest_time": "26"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "40",
+                                "reps": "10",
+                                "target": "5",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/dumbbell-shoulder-press",
+                                "exercise_name": "Dumbbell Shoulder Press",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "7"
+                            }
+                        ],
+                        "sequence": 4,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "7"
+                    }
+                ],
+                "rest_time": "7"
+            },
+            {
+                "sequence": 5,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "15",
+                                "reps": "15",
+                                "target": "12",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/dumbbell-lying-rear-lateral-raise",
+                                "exercise_name": "Dumbbell Lying Rear Lateral Raise",
+                                "exercise_muscle": "Shoulders",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Dumbbell",
+                                "rest_time": "18"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "18"
+                    }
+                ],
+                "rest_time": "18"
+            },
+            {
+                "sequence": 6,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "seconds",
+                                "weight": "900",
+                                "reps": null,
+                                "target": "1200",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/jogging-treadmill",
+                                "exercise_name": "Jogging-Treadmill",
+                                "exercise_muscle": "Quadriceps",
+                                "exercise_type": "cardio",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "4"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "4"
+                    }
+                ],
+                "rest_time": "4"
+            },
+            {
+                "sequence": 7,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "30",
+                                "reps": "200",
+                                "target": "300",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/seated-barbell-twist",
+                                "exercise_name": "Seated Barbell Twist",
+                                "exercise_muscle": "Abdominals",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Barbell",
+                                "rest_time": null
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": null
+                    }
+                ],
+                "rest_time": null
+            }
+        ]
+    },
+    {
+        "name": "Nov. 20, 2018 5:19 AM Workout",
+        "username": "coachdmurph",
+        "url": "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/coachdmurph/5bf3ec42176a3027b0ad04d8",
+        "muscles_used": [
+            "Chest",
+            "Quadriceps",
+            "Lats",
+            "Middle Back"
+        ],
+        "duration": "3180",
+        "cardio_duration": "300",
+        "energy_level": 4,
+        "self_rating": "7",
+        "workout_components": [
+            {
+                "sequence": 1,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "seconds",
+                                "weight": "300",
+                                "reps": null,
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/elliptical-trainer",
+                                "exercise_name": "Elliptical Trainer",
+                                "exercise_muscle": "Quadriceps",
+                                "exercise_type": "cardio",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "0"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "0"
+                    }
+                ],
+                "rest_time": "0"
+            },
+            {
+                "sequence": 2,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "70",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/butterfly",
+                                "exercise_name": "Butterfly",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "0"
+                            },
+                            {
+                                "sequence": 2,
+                                "weight_metric": "lbs",
+                                "weight": "85",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/butterfly",
+                                "exercise_name": "Butterfly",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "0"
+                            },
+                            {
+                                "sequence": 3,
+                                "weight_metric": "lbs",
+                                "weight": "100",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/butterfly",
+                                "exercise_name": "Butterfly",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "0"
+                            },
+                            {
+                                "sequence": 4,
+                                "weight_metric": "lbs",
+                                "weight": "130",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/butterfly",
+                                "exercise_name": "Butterfly",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "52"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "DROP_SET",
+                        "rest_time": "52"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "160",
+                                "reps": "15",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/butterfly",
+                                "exercise_name": "Butterfly",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "16"
+                            }
+                        ],
+                        "sequence": 2,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "16"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "190",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/butterfly",
+                                "exercise_name": "Butterfly",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "22"
+                            }
+                        ],
+                        "sequence": 3,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "22"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "190",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/butterfly",
+                                "exercise_name": "Butterfly",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "0"
+                            }
+                        ],
+                        "sequence": 4,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "0"
+                    }
+                ],
+                "rest_time": "0"
+            },
+            {
+                "sequence": 3,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "120",
+                                "reps": "20",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/wide-grip-lat-pulldown",
+                                "exercise_name": "Wide-Grip Lat Pulldown",
+                                "exercise_muscle": "Lats",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Cable",
+                                "rest_time": "23"
+                            },
+                            {
+                                "sequence": 2,
+                                "weight_metric": "lbs",
+                                "weight": "120",
+                                "reps": "15",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/underhand-cable-pulldowns",
+                                "exercise_name": "Underhand Cable Pulldowns",
+                                "exercise_muscle": "Lats",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Cable",
+                                "rest_time": "23"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "SUPER_SET",
+                        "rest_time": "23"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "165",
+                                "reps": "15",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/wide-grip-lat-pulldown",
+                                "exercise_name": "Wide-Grip Lat Pulldown",
+                                "exercise_muscle": "Lats",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Cable",
+                                "rest_time": "39"
+                            },
+                            {
+                                "sequence": 2,
+                                "weight_metric": "lbs",
+                                "weight": "120",
+                                "reps": "15",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/underhand-cable-pulldowns",
+                                "exercise_name": "Underhand Cable Pulldowns",
+                                "exercise_muscle": "Lats",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Cable",
+                                "rest_time": "39"
+                            }
+                        ],
+                        "sequence": 2,
+                        "type": "SUPER_SET",
+                        "rest_time": "39"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "185",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/wide-grip-lat-pulldown",
+                                "exercise_name": "Wide-Grip Lat Pulldown",
+                                "exercise_muscle": "Lats",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Cable",
+                                "rest_time": null
+                            },
+                            {
+                                "sequence": 2,
+                                "weight_metric": "lbs",
+                                "weight": "120",
+                                "reps": "15",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/underhand-cable-pulldowns",
+                                "exercise_name": "Underhand Cable Pulldowns",
+                                "exercise_muscle": "Lats",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Cable",
+                                "rest_time": "0"
+                            }
+                        ],
+                        "sequence": 3,
+                        "type": "SUPER_SET",
+                        "rest_time": "0"
+                    }
+                ],
+                "rest_time": "0"
+            },
+            {
+                "sequence": 4,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "180",
+                                "reps": "20",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/leverage-incline-chest-press",
+                                "exercise_name": "Leverage Incline Chest Press",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "39"
+                            },
+                            {
+                                "sequence": 2,
+                                "weight_metric": "lbs",
+                                "weight": "120",
+                                "reps": "15",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/seated-cable-rows",
+                                "exercise_name": "Seated Cable Rows",
+                                "exercise_muscle": "Middle Back",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Cable",
+                                "rest_time": "39"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "SUPER_SET",
+                        "rest_time": "39"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "230",
+                                "reps": "15",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/leverage-incline-chest-press",
+                                "exercise_name": "Leverage Incline Chest Press",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "24"
+                            },
+                            {
+                                "sequence": 2,
+                                "weight_metric": "lbs",
+                                "weight": "145",
+                                "reps": "15",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/seated-cable-rows",
+                                "exercise_name": "Seated Cable Rows",
+                                "exercise_muscle": "Middle Back",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Cable",
+                                "rest_time": "24"
+                            }
+                        ],
+                        "sequence": 2,
+                        "type": "SUPER_SET",
+                        "rest_time": "24"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "250",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/leverage-incline-chest-press",
+                                "exercise_name": "Leverage Incline Chest Press",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": null
+                            },
+                            {
+                                "sequence": 2,
+                                "weight_metric": "lbs",
+                                "weight": "120",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/seated-cable-rows",
+                                "exercise_name": "Seated Cable Rows",
+                                "exercise_muscle": "Middle Back",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Cable",
+                                "rest_time": "0"
+                            }
+                        ],
+                        "sequence": 3,
+                        "type": "SUPER_SET",
+                        "rest_time": "0"
+                    }
+                ],
+                "rest_time": "0"
+            },
+            {
+                "sequence": 5,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "250",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/leverage-incline-chest-press",
+                                "exercise_name": "Leverage Incline Chest Press",
+                                "exercise_muscle": "Chest",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "0"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "0"
+                    }
+                ],
+                "rest_time": "0"
+            },
+            {
+                "sequence": 6,
+                "sets": [
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "230",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/leverage-iso-row",
+                                "exercise_name": "Leverage Iso Row",
+                                "exercise_muscle": "Lats",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "0"
+                            }
+                        ],
+                        "sequence": 1,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "0"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "230",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/leverage-iso-row",
+                                "exercise_name": "Leverage Iso Row",
+                                "exercise_muscle": "Lats",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": "0"
+                            }
+                        ],
+                        "sequence": 2,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "0"
+                    },
+                    {
+                        "set_components": [
+                            {
+                                "sequence": 1,
+                                "weight_metric": "lbs",
+                                "weight": "230",
+                                "reps": "10",
+                                "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/leverage-iso-row",
+                                "exercise_name": "Leverage Iso Row",
+                                "exercise_muscle": "Lats",
+                                "exercise_type": "strength",
+                                "exercise_equipment": "Machine",
+                                "rest_time": null
+                            }
+                        ],
+                        "sequence": 3,
+                        "type": "STRAIGHT_SET",
+                        "rest_time": null
+                    }
+                ],
+                "rest_time": null
+            }
+        ]
+    }
+]

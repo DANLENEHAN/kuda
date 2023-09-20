@@ -6,7 +6,6 @@ from enum import Enum
 from itertools import cycle
 from typing import Dict, List, Optional, Tuple, TypedDict
 
-import requests
 from bs4 import BeautifulSoup, element
 
 
@@ -55,6 +54,9 @@ class WorkoutComponent(TypedDict):
 class Workout(TypedDict):
     created_by: str
     name: str
+    month: str
+    month_date: str
+    year: str
     muscles_used: List[str]
     duration: str
     cardio_duration: str
@@ -146,7 +148,7 @@ def handle_double_set_component(
         raw_title = title.text
 
         if (
-            raw_title.strip().replace("\n", "").lower() == "time"
+            "time" in raw_title.strip().replace("\n", "").lower()
             and handle_type == "cardio"
         ):
             performance = (
@@ -298,10 +300,11 @@ def find_rest_for_set_component(
             return get_rest_time(div.text)
 
 
-def scrape_workout(url: str) -> Dict[str, str]:
+def parse_workout_html(url: str, html_text: element.Tag) -> Dict[str, str]:
     username = url.split("viewworkoutlog")[1].split("/")[1]
     html_page: element.Tag = BeautifulSoup(
-        requests.get(url, headers={"User-Agent": request_agent}).text, "lxml"
+        html_text,
+        "lxml",
     )
     workout: Workout = dict()
 
@@ -309,9 +312,20 @@ def scrape_workout(url: str) -> Dict[str, str]:
     workout_name: element.Tag = html_page.find(
         "div", {"class": "rowSectionHeader"}
     ).text
+
     workout["name"] = workout_name
     workout["username"] = username
     workout["url"] = url
+
+    month = html_page.find("span", {"class": "month-abbr"})
+    month_date = html_page.find("span", {"class": "month-date"})
+    year = html_page.find("span", {"class": "year"})
+
+    workout["month"] = month.text.strip().lower() if month else None
+    workout["month_date"] = (
+        month_date.text.strip().lower() if month_date else None
+    )
+    workout["year"] = year.text.strip().lower() if year else None
 
     # Get the Muslces worked according to the App
     muscles_used_tag: element.Tag = html_page.find(
@@ -480,7 +494,8 @@ def scrape_workout(url: str) -> Dict[str, str]:
                     > 1
                 ):
                     if (
-                        "drop" not in set_component_titles[0].text.lower()
+                        len(set_component_titles) > 1
+                        and "drop" not in set_component_titles[0].text.lower()
                         and "drop" not in set_component_titles[1].text.lower()
                     ):
                         set_["set_components"].append(
