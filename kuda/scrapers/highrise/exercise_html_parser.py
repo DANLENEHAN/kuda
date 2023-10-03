@@ -21,6 +21,7 @@ class Exercise(TypedDict):
     instructions: List[str]
 
 
+# pylint: disable=too-many-locals, anomalous-backslash-in-string
 def parse_exericse_html(url: str, html: str) -> Exercise:
     """
     Parse the html of a single exercise page.

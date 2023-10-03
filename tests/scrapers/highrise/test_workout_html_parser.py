@@ -3,8 +3,8 @@ import json
 from deepdiff import DeepDiff
 
 from kuda.scrapers import parse_workout_html, scrape_urls
-from tests.vars import WORKOUT_VARIANTS
 from tests.scrapers import FILE_PATH
+from tests.vars import WORKOUT_VARIANTS
 
 
 def test_workout_scraper() -> None:

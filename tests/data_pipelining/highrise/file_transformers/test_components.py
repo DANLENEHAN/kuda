@@ -1,18 +1,17 @@
-from kuda.data_pipelining.highrise.file_transformers.components import (
-    WorkoutParser,
-    WorkoutComponentParser,
-    SetParser,
-    SetComponentParser,
-)
 from kuda.data_pipelining.highrise.file_transformers import functions
-
+from kuda.data_pipelining.highrise.file_transformers.components import (
+    SetComponentParser,
+    SetParser,
+    WorkoutComponentParser,
+    WorkoutParser,
+)
+from tests.utils.functions import dict_comparsion
 from tests.utils.test_objects import (
     HIGHRISE_SCRAPED_WORKOUT,
     HIGHRISE_SCRAPED_WORKOUT_COMPONENT,
     HIGHRISE_SCRAPED_WORKOUT_SET,
     HIGHRISE_SCRAPED_WORKOUT_SET_COMPONENT,
 )
-from tests.utils.functions import dict_comparsion
 
 
 def test_workout_parser():
@@ -28,8 +27,15 @@ def test_workout_parser():
             "name": "Bi's,Tri's,Cardio!",
             "created_at": "2017-09-16 00:00:00",
             "duration": 4680,
-            "url": "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/Bldblu/59bd3ba1af19ce019c5216a5",
-            "muscles_used": "Chest;Abdominals;Quadriceps;Biceps;Lats;Forearms;Triceps;Traps",
+            "url": (
+                "https://bodyspace.bodybuilding.com/"
+                "workouts/viewworkoutlog/Bldblu/"
+                "59bd3ba1af19ce019c5216a5"
+            ),
+            "muscles_used": (
+                "Chest;Abdominals;Quadriceps;"
+                "Biceps;Lats;Forearms;Triceps;Traps"
+            ),
             "energy_level": 4,
             "self_rating": 7,
             "cardio_duration": 0,

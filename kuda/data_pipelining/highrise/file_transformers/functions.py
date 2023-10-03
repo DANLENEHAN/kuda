@@ -1,9 +1,10 @@
 from typing import Optional
+
 from cryptography.fernet import Fernet
 
 ENCRYPTION_KEY = "5Zs50S4Cbd909UfP-HT-q0OIsFOV0pniGqEGh2XwEZU="
 
-month_str_to_num = {
+MONTH_STR_TO_NUM = {
     "jan": "01",
     "feb": "02",
     "mar": "03",
@@ -19,7 +20,7 @@ month_str_to_num = {
 }
 
 
-def encrypt_string(string: str) -> str:
+def encrypt_string(string: str) -> bytes:
     """
     Encrypts a string using the ENCRYPTION_KEY
     Args:

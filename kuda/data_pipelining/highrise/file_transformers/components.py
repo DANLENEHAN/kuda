@@ -1,11 +1,11 @@
+import datetime as dt
 from typing import Dict
 from uuid import uuid4
-import datetime as dt
-from pprint import pprint
 
 from kuda.data_pipelining.highrise.file_transformers import functions
 
 
+# pylint: disable=too-many-instance-attributes
 class WorkoutParser:
     """
     Parses a workout from the raw
@@ -43,7 +43,7 @@ class WorkoutParser:
                 str: The date in the PostgreSQL format
                         'YYYY-MM-DD HH:MM:SS'
         """
-        month_num = functions.month_str_to_num[month.lower()]
+        month_num = functions.MONTH_STR_TO_NUM[month.lower()]
         date_string = f"{month_date}{month_num}{year}"
         return dt.datetime.strptime(date_string, "%d%m%Y").strftime(
             "%Y-%m-%d %H:%M:%S"

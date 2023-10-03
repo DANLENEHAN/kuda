@@ -20,7 +20,11 @@ HIGHRISE_SCRAPED_WORKOUT = {
     ],
     "name": "Bi's,Tri's,Cardio!",
     "self_rating": "7",
-    "url": "https://bodyspace.bodybuilding.com/workouts/viewworkoutlog/Bldblu/59bd3ba1af19ce019c5216a5",
+    "url": (
+        "https://bodyspace.bodybuilding.com/"
+        "workouts/viewworkoutlog/Bldblu/"
+        "59bd3ba1af19ce019c5216a5"
+    ),
     "username": "Bldblu",
     "year": "2017",
     "workout_components": [],
@@ -44,7 +48,11 @@ HIGHRISE_SCRAPED_WORKOUT_SET_COMPONENT = {
     "weight_metric": "lbs",
     "weight": "40",
     "reps": "10",
-    "exercise_link": "http://www.bodybuilding.com/exercises/detail/view/name/alternate-incline-dumbbell-curl",
+    "exercise_link": (
+        "http://www.bodybuilding.com/"
+        "exercises/detail/view/name/"
+        "alternate-incline-dumbbell-curl"
+    ),
     "exercise_name": "Alternate Incline Dumbbell Curl",
     "exercise_muscle": "Biceps",
     "exercise_type": "strength",

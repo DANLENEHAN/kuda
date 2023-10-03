@@ -9,7 +9,11 @@ from kuda.scrapers.async_scrape import scrape_urls
 current_script_path = os.path.abspath(__file__)
 current_script_path = "/".join(current_script_path.split("/")[:-1])
 
-with open(os.path.join(current_script_path, "files/exercise_links.json")) as f:
+with open(
+    os.path.join(current_script_path, "files/exercise_links.json"),
+    "r",
+    encoding="utf-8",
+) as f:
     exercise_links = json.load(f)
 
 
@@ -35,6 +39,8 @@ df.to_csv(
 )
 
 with open(
-    os.path.join(current_script_path, "files/failed_exercises.json"), "w"
+    os.path.join(current_script_path, "files/failed_exercises.json"),
+    "w",
+    encoding="utf-8",
 ) as f:
     json.dump(failed_results, f)

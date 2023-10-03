@@ -143,7 +143,9 @@ for link_element in exercise_result_div.find_elements(By.TAG_NAME, "a"):
 
 
 with open(
-    os.path.join(current_script_path, "files/exercise_links.json"), "w"
+    os.path.join(current_script_path, "files/exercise_links.json"),
+    "w",
+    encoding="utf-8",
 ) as f:
     json.dump(all_links, f, indent=4)
 
