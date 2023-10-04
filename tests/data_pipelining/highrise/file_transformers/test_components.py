@@ -56,8 +56,6 @@ def test_workout_component_parser():
     """
 
     workout_component_parser = WorkoutComponentParser(
-        workout_id=1,
-        created_at="2017-09-16 00:00:00",
         raw_dict=HIGHRISE_SCRAPED_WORKOUT_COMPONENT,
     )
     dict_comparsion(
@@ -80,8 +78,6 @@ def test_set_parser():
     """
 
     set_parser = SetParser(
-        workout_component_id=1,
-        created_at="2017-09-16 00:00:00",
         raw_dict=HIGHRISE_SCRAPED_WORKOUT_SET,
     )
     dict_comparsion(
@@ -105,8 +101,6 @@ def test_set_component_parser():
     """
 
     set_component_parser = SetComponentParser(
-        set_id=1,
-        created_at="2017-09-16 00:00:00",
         raw_dict=HIGHRISE_SCRAPED_WORKOUT_SET_COMPONENT,
     )
 
@@ -120,6 +114,11 @@ def test_set_component_parser():
             "weight": 40.0,
             "reps": 10,
             "rest_time": 0,
+            "exercise_link": (
+                "http://www.bodybuilding.com/"
+                "exercises/detail/view/name/"
+                "alternate-incline-dumbbell-curl"
+            ),
         },
         exclude_keys=["set_component_id"],
     )

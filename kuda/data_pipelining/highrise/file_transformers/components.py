@@ -56,14 +56,10 @@ class WorkoutComponentParser:
     scraped highrise data.
     """
 
-    def __init__(
-        self, workout_id: int, created_at: str, raw_dict: Dict
-    ) -> None:
+    def __init__(self, raw_dict: Dict) -> None:
         # ORM fields
         self.workout_component_id = str(uuid4())
-        self.workout_id = workout_id
-        self.created_at = created_at
-        self.rest_time = functions.parse_int(raw_dict["rest_time"])
+        self.rest_time = functions.parse_int(raw_dict.get("rest_time"))
 
 
 class SetParser:
@@ -72,15 +68,11 @@ class SetParser:
     scraped highrise data.
     """
 
-    def __init__(
-        self, workout_component_id: int, created_at: str, raw_dict: Dict
-    ) -> None:
+    def __init__(self, raw_dict: Dict) -> None:
         # ORM fields
         self.set_id = str(uuid4())
-        self.workout_component_id = workout_component_id
-        self.created_at = created_at
         self.sequence = raw_dict["sequence"]  # already an int
-        self.rest_time = functions.parse_int(raw_dict["rest_time"])
+        self.rest_time = functions.parse_int(raw_dict.get("rest_time"))
         # Non ORM fields
         self.type = raw_dict["type"]
 
@@ -91,13 +83,12 @@ class SetComponentParser:
     scraped highrise data.
     """
 
-    def __init__(self, set_id: int, created_at: str, raw_dict: Dict) -> None:
+    def __init__(self, raw_dict: Dict) -> None:
         # ORM fields
         self.set_component_id = str(uuid4())
-        self.set_id = set_id
-        self.created_at = created_at
-        self.sequence = raw_dict["sequence"]  # already an int
+        self.sequence = raw_dict.get("sequence")
         self.weight_metric = raw_dict["weight_metric"]
-        self.weight = functions.parse_float(raw_dict["weight"])
-        self.reps = functions.parse_int(raw_dict["reps"])
-        self.rest_time = functions.parse_int(raw_dict["rest_time"])
+        self.weight = functions.parse_int(raw_dict.get("weight"))
+        self.reps = functions.parse_int(raw_dict.get("reps"))
+        self.rest_time = functions.parse_int(raw_dict.get("rest_time"))
+        self.exercise_link = raw_dict["exercise_link"]

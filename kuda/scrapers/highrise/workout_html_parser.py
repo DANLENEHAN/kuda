@@ -473,14 +473,21 @@ def parse_workout_html(url: str, html_text: element.Tag) -> Dict[str, str]:
                         pass
                     # complicated cardio
                     else:
-                        set_["set_components"].append(
-                            handle_double_set_component(
-                                set_component_titles=set_component_titles,
-                                set_component_performances=set_component_performances,
-                                exercise=next(exercise_data),
-                                handle_type="cardio",
-                            )
+                        double_set_component = handle_double_set_component(
+                            set_component_titles=set_component_titles,
+                            set_component_performances=set_component_performances,
+                            exercise=next(exercise_data),
+                            handle_type="cardio",
                         )
+                        if set_index == len(set_tags) - 1:
+                            # Last set in a workout component should
+                            # take the rest time of the workout component
+                            double_set_component[
+                                "rest_time"
+                            ] = workout_component["rest_time"]
+                        double_set_component["sequence"] = 1
+                        set_["set_components"].append(double_set_component)
+                        set_["rest_time"] = double_set_component["rest_time"]
                         workout_component["sets"].append(set_)
                         continue
             else:
@@ -501,23 +508,29 @@ def parse_workout_html(url: str, html_text: element.Tag) -> Dict[str, str]:
                         and "drop" not in set_component_titles[0].text.lower()
                         and "drop" not in set_component_titles[1].text.lower()
                     ):
-                        set_["set_components"].append(
-                            handle_double_set_component(
-                                set_component_titles=set_component_titles
-                                if len(exercise_tags) == 1
-                                else set_component_titles[
-                                    set_component_index:
-                                ],
-                                set_component_performances=set_component_performances
-                                if len(exercise_tags) == 1
-                                else set_component_performances[
-                                    set_component_index:
-                                ],
-                                exercise=next(exercise_data),
-                                handle_type="weight",
-                            )
+                        double_set_component = handle_double_set_component(
+                            set_component_titles=set_component_titles
+                            if len(exercise_tags) == 1
+                            else set_component_titles[set_component_index:],
+                            set_component_performances=set_component_performances
+                            if len(exercise_tags) == 1
+                            else set_component_performances[
+                                set_component_index:
+                            ],
+                            exercise=next(exercise_data),
+                            handle_type="weight",
                         )
-                        # workout_component["sets"].append(set_)
+                        if set_index == len(set_tags) - 1:
+                            # Last set in a workout component should
+                            # take the rest time of the workout component
+                            double_set_component[
+                                "rest_time"
+                            ] = workout_component["rest_time"]
+                        double_set_component["sequence"] = (
+                            set_component_index + 1
+                        )
+                        set_["set_components"].append(double_set_component)
+                        set_["rest_time"] = double_set_component["rest_time"]
                         break
 
                 set_component: SetComponent = SetComponent()

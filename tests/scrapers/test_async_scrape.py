@@ -27,4 +27,4 @@ def test_workout_link_html_parser() -> None:
         assert set(parsed_page.pop("muscles_used")) == set(
             parsed_workouts[index].pop("muscles_used")
         )
-        assert DeepDiff(parsed_page, parsed_workouts[index]) == {}
+        assert DeepDiff(parsed_workouts[index], parsed_page) == {}

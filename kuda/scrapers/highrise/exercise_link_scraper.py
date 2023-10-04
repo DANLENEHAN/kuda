@@ -108,45 +108,48 @@ def find_and_click_btn(
     time.sleep(2)
 
 
-driver = create_chrome_driver()
-driver.get("https://www.bodybuilding.com/exercises/finder")
+if __name__ == "__main__":
+    chrome_driver = create_chrome_driver()
+    chrome_driver.get("https://www.bodybuilding.com/exercises/finder")
 
-pass_cookies_and_email_opt(driver)
+    pass_cookies_and_email_opt(driver=chrome_driver)
 
-button_locator = (By.CLASS_NAME, "ExLoadMore-btn")
-exercise_count = 0
-retry_count = 0
-while True:
-    try:
-        find_and_click_btn(driver, button_locator)
-        exercise_count += 15
-        if exercise_count % 100 == 0:
-            print(f"Scrolled past {exercise_count} workouts.")
-    except NoSuchElementException:
-        retry_count += 1
-        if retry_count < 4:
-            print("Button not found. Retrying.")
-            time.sleep(5)
-            continue
-        print("Button no longer exists. Exiting.")
-        break
+    locator = (By.CLASS_NAME, "ExLoadMore-btn")
+    exercise_count = 0
+    retry_count = 0
+    while True:
+        try:
+            find_and_click_btn(driver=chrome_driver, button_locator=locator)
+            exercise_count += 15
+            if exercise_count % 100 == 0:
+                print(f"Scrolled past {exercise_count} workouts.")
+        except NoSuchElementException:
+            retry_count += 1
+            if retry_count < 4:
+                print("Button not found. Retrying.")
+                time.sleep(5)
+                continue
+            print("Button no longer exists. Exiting.")
+            break
 
+    exercise_result_div = chrome_driver.find_element(
+        By.CLASS_NAME, "ExCategory-results"
+    )
 
-exercise_result_div = driver.find_element(By.CLASS_NAME, "ExCategory-results")
+    all_links = []
+    for link_element in exercise_result_div.find_elements(By.TAG_NAME, "a"):
+        href = link_element.get_attribute("href")
+        if href:
+            if not any(
+                s in href for s in ("/muscle/", "/equipment/", "finder")
+            ):
+                all_links.append(href)
 
-all_links = []
-for link_element in exercise_result_div.find_elements(By.TAG_NAME, "a"):
-    href = link_element.get_attribute("href")
-    if href:
-        if not any(s in href for s in ("/muscle/", "/equipment/", "finder")):
-            all_links.append(href)
+    with open(
+        os.path.join(current_script_path, "files/exercise_links.json"),
+        "w",
+        encoding="utf-8",
+    ) as f:
+        json.dump(all_links, f, indent=4)
 
-
-with open(
-    os.path.join(current_script_path, "files/exercise_links.json"),
-    "w",
-    encoding="utf-8",
-) as f:
-    json.dump(all_links, f, indent=4)
-
-print(f"Script took {round((time.time() - script_start)/60, 2)}/  to run.")
+    print(f"Script took {round((time.time() - script_start)/60, 2)}/  to run.")

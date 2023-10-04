@@ -1,38 +1,63 @@
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, TypedDict, Union
 
 from kuda.data_pipelining.highrise.file_transformers.components import (
-    WorkoutParser,
-    WorkoutComponentParser,
-    SetParser,
     SetComponentParser,
+    SetParser,
+    WorkoutComponentParser,
+    WorkoutParser,
 )
 
 
+class TreeLevelMap(TypedDict):
+    """
+    Dictionary for traversing and storing
+    the workout tree levels.
+    """
+
+    parser: Union[
+        type[WorkoutParser],
+        type[WorkoutComponentParser],
+        type[SetParser],
+        type[SetComponentParser],
+    ]
+    primary_key: str
+    components: List
+    child_key: Optional[str]
+
+
 TREE_TRAVERSE_MAP = {
-    "workout": {
-        "parser": WorkoutParser,
-        "primary_key": "workout_id",
-        "components": [],
-        "child_key": "workout_components",
-    },
-    "workout_components": {
-        "parser": WorkoutComponentParser,
-        "primary_key": "workout_component_id",
-        "components": [],
-        "child_key": "sets",
-    },
-    "sets": {
-        "parser": SetParser,
-        "primary_key": "set_id",
-        "components": [],
-        "child_key": "set_components",
-    },
-    "set_components": {
-        "parser": SetComponentParser,
-        "primary_key": "set_component_id",
-        "components": [],
-        "child_key": None,
-    },
+    "workout": TreeLevelMap(
+        {
+            "parser": WorkoutParser,
+            "primary_key": "workout_id",
+            "components": [],
+            "child_key": "workout_components",
+        }
+    ),
+    "workout_components": TreeLevelMap(
+        {
+            "parser": WorkoutComponentParser,
+            "primary_key": "workout_component_id",
+            "components": [],
+            "child_key": "sets",
+        }
+    ),
+    "sets": TreeLevelMap(
+        {
+            "parser": SetParser,
+            "primary_key": "set_id",
+            "components": [],
+            "child_key": "set_components",
+        }
+    ),
+    "set_components": TreeLevelMap(
+        {
+            "parser": SetComponentParser,
+            "primary_key": "set_component_id",
+            "components": [],
+            "child_key": None,
+        }
+    ),
 }
 
 
@@ -42,6 +67,13 @@ def parse_workout_tree_level(
     foreign_key: Optional[Dict] = None,
     created_at: Optional[str] = None,
 ):
+    """
+    Function for traversing the Workout Tree
+    and storing all it's levels in seperate
+    list whilst maintain the primary:foreign
+    key linkage.
+    """
+
     for node in nodes:
         level_info = TREE_TRAVERSE_MAP[level_name]
         parsed_node = level_info["parser"](node).__dict__
@@ -71,15 +103,13 @@ if __name__ == "__main__":
     import json
     from pprint import pprint
 
-    obj = json.load(
+    workout = json.load(
         open(
-            "/Users/dan/Work/kuda/85ad6014-1010-498c-8b55-3d9c1ea12ddf.json",
+            "/Users/dan/Work/kuda/data/workout_links/parse_test.json",
             "r",
             encoding="utf-8",
         )
     )
-
-    workout = obj[0]
 
     parse_workout_tree_level(
         nodes=[workout],

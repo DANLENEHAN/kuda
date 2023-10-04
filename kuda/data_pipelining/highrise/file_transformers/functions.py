@@ -42,7 +42,7 @@ def decrypt_string(string: str) -> str:
     return Fernet(ENCRYPTION_KEY).decrypt(string.encode("utf-8")).decode()
 
 
-def parse_int(string: str) -> Optional[int]:
+def parse_int(string: Optional[str]) -> Optional[int]:
     """
     Parses a string into an int
     Args:
@@ -50,13 +50,12 @@ def parse_int(string: str) -> Optional[int]:
     Returns:
         int: The parsed int
     """
-    try:
+    if string and string.isnumeric():
         return int(string)
-    except ValueError:
-        return 0
+    return None
 
 
-def parse_float(string: str) -> Optional[float]:
+def parse_float(string: Optional[str]) -> Optional[float]:
     """
     Parses a string into a float
     Args:
@@ -64,7 +63,6 @@ def parse_float(string: str) -> Optional[float]:
     Returns:
         float: The parsed float
     """
-    try:
+    if string and string.isdecimal():
         return float(string)
-    except ValueError:
-        return None
+    return None

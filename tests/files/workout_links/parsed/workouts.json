@@ -1281,11 +1281,13 @@
                                 "weight": "600",
                                 "reps": null,
                                 "target": null,
-                                "rest_time": "0"
+                                "rest_time": "0",
+                                "sequence": 1
                             }
                         ],
                         "sequence": 1,
-                        "type": "STRAIGHT_SET"
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "0"
                     },
                     {
                         "set_components": [
@@ -1299,11 +1301,13 @@
                                 "weight": "900",
                                 "reps": null,
                                 "target": null,
-                                "rest_time": null
+                                "rest_time": "0",
+                                "sequence": 1
                             }
                         ],
                         "sequence": 2,
-                        "type": "STRAIGHT_SET"
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "0"
                     }
                 ],
                 "rest_time": "0"
@@ -1323,11 +1327,13 @@
                                 "weight": "540",
                                 "reps": null,
                                 "target": null,
-                                "rest_time": null
+                                "rest_time": "0",
+                                "sequence": 1
                             }
                         ],
                         "sequence": 1,
-                        "type": "STRAIGHT_SET"
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "0"
                     }
                 ],
                 "rest_time": "0"
@@ -2147,11 +2153,13 @@
                                 "weight": "0",
                                 "reps": null,
                                 "target": null,
-                                "rest_time": null
+                                "rest_time": "45",
+                                "sequence": 1
                             }
                         ],
                         "sequence": 1,
-                        "type": "STRAIGHT_SET"
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "45"
                     }
                 ],
                 "rest_time": "45"
@@ -3185,11 +3193,13 @@
                                 "weight": "1",
                                 "reps": null,
                                 "target": "120",
-                                "rest_time": null
+                                "rest_time": "45",
+                                "sequence": 1
                             }
                         ],
                         "sequence": 1,
-                        "type": "STRAIGHT_SET"
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "45"
                     }
                 ],
                 "rest_time": "45"
@@ -3268,7 +3278,8 @@
                                 "weight": "1",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": null,
+                                "sequence": 2
                             }
                         ],
                         "sequence": 1,
@@ -3300,7 +3311,8 @@
                                 "weight": "1",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": null,
+                                "sequence": 2
                             }
                         ],
                         "sequence": 2,
@@ -3332,7 +3344,8 @@
                                 "weight": "1",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": null,
+                                "sequence": 2
                             }
                         ],
                         "sequence": 3,
@@ -3364,12 +3377,13 @@
                                 "weight": "1",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": "45",
+                                "sequence": 2
                             }
                         ],
                         "sequence": 4,
                         "type": "SUPER_SET",
-                        "rest_time": null
+                        "rest_time": "45"
                     }
                 ],
                 "rest_time": "45"
@@ -3507,7 +3521,8 @@
                                 "weight": "1",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": null,
+                                "sequence": 2
                             }
                         ],
                         "sequence": 1,
@@ -3539,7 +3554,8 @@
                                 "weight": "1",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": null,
+                                "sequence": 2
                             }
                         ],
                         "sequence": 2,
@@ -3571,12 +3587,13 @@
                                 "weight": "1",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": "45",
+                                "sequence": 2
                             }
                         ],
                         "sequence": 3,
                         "type": "SUPER_SET",
-                        "rest_time": null
+                        "rest_time": "45"
                     }
                 ],
                 "rest_time": "45"
@@ -3852,7 +3869,8 @@
                                 "weight": "0",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": null,
+                                "sequence": 2
                             }
                         ],
                         "sequence": 1,
@@ -3884,7 +3902,8 @@
                                 "weight": "0",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": null,
+                                "sequence": 2
                             }
                         ],
                         "sequence": 2,
@@ -3916,12 +3935,13 @@
                                 "weight": "0",
                                 "reps": null,
                                 "target": "60",
-                                "rest_time": null
+                                "rest_time": "45",
+                                "sequence": 2
                             }
                         ],
                         "sequence": 3,
                         "type": "SUPER_SET",
-                        "rest_time": null
+                        "rest_time": "45"
                     }
                 ],
                 "rest_time": "45"
@@ -4388,11 +4408,13 @@
                                 "weight": "0",
                                 "reps": "0",
                                 "target": "12",
-                                "rest_time": "45"
+                                "rest_time": "45",
+                                "sequence": 1
                             }
                         ],
                         "sequence": 1,
-                        "type": "STRAIGHT_SET"
+                        "type": "STRAIGHT_SET",
+                        "rest_time": "45"
                     },
                     {
                         "set_components": [
