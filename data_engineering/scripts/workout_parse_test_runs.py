@@ -20,5 +20,7 @@ workout = parse_workout_html(
     url=broken["body"][0],
 )
 
-with open("data/workout_links/parse_test.json", "w", encoding="utf-8") as f:
+with open(
+    "data/workout_links/parsed/parse_test.json", "w", encoding="utf-8"
+) as f:
     f.write(json.dumps(workout, indent=4))

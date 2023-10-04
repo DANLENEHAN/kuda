@@ -6,14 +6,14 @@
     "month_date": "7",
     "year": "2017",
     "muscles_used": [
-        "Shoulders",
-        "Lats",
-        "Middle Back",
-        "Quadriceps",
         "Traps",
-        "Forearms",
+        "Middle Back",
+        "Shoulders",
+        "Quadriceps",
         "Biceps",
-        "Hamstrings"
+        "Hamstrings",
+        "Forearms",
+        "Lats"
     ],
     "duration": "3780",
     "cardio_duration": "0",
